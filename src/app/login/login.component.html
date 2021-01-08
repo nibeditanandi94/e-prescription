@@ -1,0 +1,21 @@
+<form *ngIf="!isSignedIn">
+    <div class="imgContainer">
+        <img src="assets/images/img_avatar2.png" alt="avatar" width="50" height="100">
+    </div>
+
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" #email >
+
+        <br><br>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" #password>
+
+        <br><br>
+
+        <button (click)="onSignIn(email.value, password.value)">
+            Login
+        </button>
+      </div>
+</form>

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">
+    <img src = "assets/images/Logo.svg">
+    </a>
+    
+    <!-- Links -->
+    <div class="topnav">
+      <ul class="nav navbar-nav">
+        <li><a href="#">List</a></li>
+        <li><a href="#">Display</a></li>
+      </ul>
+  
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <button [routerLink]="'/login'" class= "btn btn-primary" type="button">
+            Login
+          </button>
+        </li>
+
+        <li>
+          <button [routerLink]="'/register'" class= "btn btn-primary" type="button">
+            Register
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>

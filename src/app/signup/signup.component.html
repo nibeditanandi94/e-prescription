@@ -1,0 +1,17 @@
+<form *ngIf="!isSignedIn">
+     <div class="container">
+       <label for="uname"><b>Username</b></label>
+        <input type="text" #emailSignUp>
+
+        <br><br>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" #passwordSignUp>
+
+        <br><br>
+        
+        <button [routerLinks]="'/home'" (click)="onSignUp(emailSignUp.value, passwordSignUp.value)">
+            Register
+        </button>
+      </div>
+</form>
