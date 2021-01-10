@@ -1,32 +1,33 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <!-- Brand/logo -->
-    <a class="navbar-brand">
-    <img src = "assets/images/Logo.svg">
-    </a>
-    
-    <!-- Links -->
-    <div class="topnav">
-      <ul class="nav navbar-nav">
-        <li><a [routerLink]="'/Patientlist'">List</a></li>
-        <li><a href="#">Display</a></li>
-      </ul>
-  
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <button *ngIf="!userRegistered" [routerLink]="'/login'" class= "btn btn-primary" type="button">
-            Login
-          </button>
-        </li>
+  <!-- Brand/logo -->
+  <a class="navbar-brand">
+    <img src="assets/images/Logo.svg">
+  </a>
 
-        <li>
-          <button *ngIf="!userRegistered" [routerLink]="'/register'" class= "btn btn-primary" type="button">
-            Register
-          </button>
-        </li>
-        
-        <li>
-        <button *ngIf="userRegistered" [routerLink]="'/login'" (click)="onLogout()">Logout</button>
+  <!-- Links -->
+  <div class="topnav">
+    <ul class="nav navbar-nav">
+      <li><a [routerLink]="'/Patientlist'">List</a></li>
+      <li><a href="#">Display</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+      <ng-container *ngIf="!userLoggedIn">
+
+        <button [routerLink]="'/login'" class="btn btn-primary" type="button">
+          Login
+        </button>
+
+        <button [routerLink]="'/register'" class="btn btn-primary" type="button">
+          Register
+        </button>
+
+      </ng-container>
+
+      <li>
+        <button *ngIf="userLoggedIn" [routerLink]="'/login'" (click)="onLogout()">Logout</button>
       </li>
-      </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>

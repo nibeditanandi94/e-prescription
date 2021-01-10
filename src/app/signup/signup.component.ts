@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import 'firebase/auth';
-import { RegisterService } from '../core/services/register.service';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,8 +12,7 @@ import { RegisterService } from '../core/services/register.service';
 })
 export class SignupComponent implements OnInit {
   registerForm:FormGroup
-  
-  constructor(private router:Router, private registerService:RegisterService) { }
+  constructor(private router:Router, private userservice:UserService) { }
 
   ngOnInit(): void {
     this.registerForm= new FormGroup({
@@ -26,10 +25,10 @@ export class SignupComponent implements OnInit {
   }
   OnSignUp(){
     const {email,password} = this.registerForm.value
-    this.registerService.createUser(this.registerForm.value)
+    this.userservice.createUser(this.registerForm.value)
     .then(user => {
      console.log('Registered User' ,user);
-     this.registerService.isRegisteredUser.next(true);
+     this.userservice.isLoggedUser.next(true)
      this.router.navigate(['/home']);
     });
     }

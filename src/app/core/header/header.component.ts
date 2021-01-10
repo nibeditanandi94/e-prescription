@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../services/register.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -10,18 +12,22 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HeaderComponent implements OnInit {
 
-  userRegistered=false;
-  constructor(private registerService:RegisterService, private auth:AngularFireAuth) { }
+  userLoggedIn=false;
+  constructor(private userService:UserService,
+              private auth:AngularFireAuth,
+             ) { }
 
   ngOnInit(): void {
-    this.registerService.isRegisteredUser.subscribe(isRegistered =>
+    this.userService.isLoggedUser.subscribe(isLoggedIn =>
       {
-        this.userRegistered=isRegistered;
+        this.userLoggedIn=isLoggedIn;
       });
   }
 
   onLogout(){
     this.auth.signOut();
+    this.userService.isLoggedUser.next(false);
  }
+
   
 }
