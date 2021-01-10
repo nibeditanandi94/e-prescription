@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-signup',
@@ -7,21 +10,21 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  isSignedIn=false
-  constructor(private firebaseservice:FirebaseService) { }
+  registerForm:FormGroup
+  constructor(private router:Router, private auth:AngularFireAuth) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('user')!==null)
-    this.isSignedIn=true;
-    else
-    this.isSignedIn=false
+    this.registerForm= new FormGroup({
+      email:new FormControl('',Validators.required),
+      password:new FormControl('',[Validators.required,Validators.minLength(6)])
+    })
   }
-
-  async onSignUp(email:string,password:string){
-await this.firebaseservice.signUp(email,password)
-if(this.firebaseservice.isLoggedIn)
-this.isSignedIn=true
-
+  createUser(){
+    const {email,password} = this.registerForm.value
+    this.auth.createUserWithEmailAndPassword(email,password)
+    .then(user => {
+     console.log('Registered User' ,user);
+     this.router.navigate(['/home']);
+    });
   }
-
 }

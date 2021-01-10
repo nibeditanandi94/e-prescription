@@ -8,10 +8,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginModule } from '../login/login.module';
 import { SignupModule } from '../signup/signup.module';
 import { HomeComponent } from './home/home.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
 
 
 @NgModule({
-  declarations: [CoreMainComponent, HeaderComponent, FooterComponent, HomeComponent],
+  declarations: [CoreMainComponent, HeaderComponent, FooterComponent, HomeComponent, PatientListComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

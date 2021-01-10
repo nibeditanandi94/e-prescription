@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +9,20 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
- isSignedIn=false
-  constructor(private firebaseservice:FirebaseService) { }
+
+  loginForm:FormGroup;
+  constructor(private router:Router, private auth:AngularFireAuth ) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('user')!==null)
-    this.isSignedIn=true
-    else
-    this.isSignedIn=false
+      this.loginForm=new FormGroup({
+      email: new FormControl('',Validators.required),
+      password: new FormControl('', Validators.required)
+    });
   }
- async onSignIn(email:string,password:string){
-await this.firebaseservice.signIn(email, password)
-if(this.firebaseservice.isLoggedIn)
-this.isSignedIn=true
-  }
+  
+onLogin(){
+const {email, password}= this.loginForm.value;
+this.auth.signInWithEmailAndPassword(email, password)
+.then(()=>this.router.navigate(['/home']));
+}
 }

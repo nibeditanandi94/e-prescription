@@ -1,17 +1,27 @@
-<form *ngIf="!isSignedIn">
-     <div class="container">
-       <label for="uname"><b>Username</b></label>
-        <input type="text" #emailSignUp>
+<form class="form" [formGroup]="registerForm">
+<div class="form-control">
+  <label for="email">Email</label> 
+  <input formControlName="email" type="email" id="email">
+  <p *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+    Please enter a valid email.
+  </p>
+</div>
 
-        <br><br>
+<br>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" #passwordSignUp>
+<div class="form-control">
+  <label for="password">Password</label> 
+  <input formControlName="password" type="password" id="password">
+  <p *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+    Please enter a valid email.
+  </p>
+</div>
 
-        <br><br>
-        
-        <button [routerLinks]="'/home'" (click)="onSignUp(emailSignUp.value, passwordSignUp.value)">
-            Register
-        </button>
-      </div>
+<div class="form-footer">
+  <button (click)="createUser()" style="margin-top:20px;">Register</button>
+  <a [routerLink]="'/login'">Login</a>
+</div>
+
 </form>
+
+

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
+// import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+
+// const redirectUnauthorizedToLogin =() =>redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {path:'login', component:LoginComponent}

@@ -1,21 +1,25 @@
-<form *ngIf="!isSignedIn">
-    <div class="imgContainer">
-        <img src="assets/images/img_avatar2.png" alt="avatar" width="50" height="100">
+<form class="form" [formGroup]="loginForm">
+    <div class="form-control">
+      <label for="email">Login Email</label>
+      <input formControlName="email" type="email" id="email">
+      <p *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
+        Please enter a valid email.
+      </p>
     </div>
 
-    <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" #email >
+    <br>
 
-        <br><br>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" #password>
-
-        <br><br>
-
-        <button (click)="onSignIn(email.value, password.value)">
-            Login
-        </button>
-      </div>
-</form>
+    <div class="form-control">
+      <label for="password">Login Password</label>
+      <input formControlName="password" type="password" id="password">
+      <p *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+        Please enter a valid password.
+      </p>
+    </div>
+    
+    <div class="form-footer">
+      <button (click)="onLogin()" style="margin-top:20px;">Login</button>
+      <a [routerLink]="'/register'">Register</a>
+    </div>
+    
+    </form>
