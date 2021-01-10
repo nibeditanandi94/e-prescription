@@ -12,6 +12,7 @@ import { RegisterService } from '../core/services/register.service';
 })
 export class SignupComponent implements OnInit {
   registerForm:FormGroup
+  
   constructor(private router:Router, private registerService:RegisterService) { }
 
   ngOnInit(): void {
@@ -28,7 +29,8 @@ export class SignupComponent implements OnInit {
     this.registerService.createUser(this.registerForm.value)
     .then(user => {
      console.log('Registered User' ,user);
+     this.registerService.isRegisteredUser.next(true);
      this.router.navigate(['/home']);
     });
-  }
+    }
 }

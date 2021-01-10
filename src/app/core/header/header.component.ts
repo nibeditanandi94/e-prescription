@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from '../services/register.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -8,12 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  userRegistered=false;
+  constructor(private registerService:RegisterService, private auth:AngularFireAuth) { }
 
   ngOnInit(): void {
+    this.registerService.isRegisteredUser.subscribe(isRegistered =>
+      {
+        this.userRegistered=isRegistered;
+      });
   }
 
-  // img:string="././assets/images/logo.png";
-
+  onLogout(){
+    this.auth.signOut();
+ }
   
 }

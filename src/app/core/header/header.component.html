@@ -13,16 +13,20 @@
   
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <button [routerLink]="'/login'" class= "btn btn-primary" type="button">
+          <button *ngIf="!userRegistered" [routerLink]="'/login'" class= "btn btn-primary" type="button">
             Login
           </button>
         </li>
 
         <li>
-          <button [routerLink]="'/register'" class= "btn btn-primary" type="button">
+          <button *ngIf="!userRegistered" [routerLink]="'/register'" class= "btn btn-primary" type="button">
             Register
           </button>
         </li>
+        
+        <li>
+        <button *ngIf="userRegistered" [routerLink]="'/login'" (click)="onLogout()">Logout</button>
+      </li>
       </ul>
     </div>
   </nav>
