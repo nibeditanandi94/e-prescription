@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
+
 import 'firebase/auth';
+import { RegisterService } from '../core/services/register.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,17 +12,20 @@ import 'firebase/auth';
 })
 export class SignupComponent implements OnInit {
   registerForm:FormGroup
-  constructor(private router:Router, private auth:AngularFireAuth) { }
+  constructor(private router:Router, private registerService:RegisterService) { }
 
   ngOnInit(): void {
     this.registerForm= new FormGroup({
-      email:new FormControl('',Validators.required),
-      password:new FormControl('',[Validators.required,Validators.minLength(6)])
+      email:new FormControl('',[Validators.required,
+                               Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      password:new FormControl('',[Validators.required,
+                                   Validators.minLength(6),
+                                  ])
     })
   }
-  createUser(){
+  OnSignUp(){
     const {email,password} = this.registerForm.value
-    this.auth.createUserWithEmailAndPassword(email,password)
+    this.registerService.createUser(this.registerForm.value)
     .then(user => {
      console.log('Registered User' ,user);
      this.router.navigate(['/home']);

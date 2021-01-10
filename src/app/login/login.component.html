@@ -2,8 +2,11 @@
     <div class="form-control">
       <label for="email">Login Email</label>
       <input formControlName="email" type="email" id="email">
-      <p *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
-        Please enter a valid email.
+      <p *ngIf="loginForm.get('email').errors?.required && loginForm.get('email').touched">
+        Email field is required
+      </p>
+      <p *ngIf="loginForm.get('email').errors?.pattern">
+        Email is invalid
       </p>
     </div>
 
@@ -18,7 +21,7 @@
     </div>
     
     <div class="form-footer">
-      <button (click)="onLogin()" style="margin-top:20px;">Login</button>
+      <button (click)="onLogin()" style="margin-top:20px;" [disabled]="!loginForm.valid">Login</button>
       <a [routerLink]="'/register'">Register</a>
     </div>
     

@@ -2,8 +2,11 @@
 <div class="form-control">
   <label for="email">Email</label> 
   <input formControlName="email" type="email" id="email">
-  <p *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
-    Please enter a valid email.
+  <p *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
+    Email field is required
+  </p>
+  <p *ngIf="registerForm.get('email').errors?.pattern">
+    Email is invalid
   </p>
 </div>
 
@@ -13,12 +16,14 @@
   <label for="password">Password</label> 
   <input formControlName="password" type="password" id="password">
   <p *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
-    Please enter a valid email.
+    Please enter a valid & 6-character password.
   </p>
 </div>
 
 <div class="form-footer">
-  <button (click)="createUser()" style="margin-top:20px;">Register</button>
+  <button (click)="OnSignUp()" style="margin-top:20px;" [disabled]="!registerForm.valid">
+    Register
+  </button>
   <a [routerLink]="'/login'">Login</a>
 </div>
 
