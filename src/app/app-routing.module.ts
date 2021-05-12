@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
-import { HomeComponent } from './core/home/home.component';
 import{redirectUnauthorizedTo} from '@angular/fire/auth-guard'
 import { PatientListComponent } from './core/patient-list/patient-list.component';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 const redirectUnauthorizedToLogin =() =>redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  {path:'home', component:HomeComponent,
-   canActivate:[AngularFireAuthGuard],
-   data:{authGuardPipe:redirectUnauthorizedToLogin},
-  },
-  {path:'Patientlist', component:PatientListComponent,
+  {path:'home',component:HomeComponent,
   canActivate:[AngularFireAuthGuard],
-  data:{authGuardPipe:redirectUnauthorizedToLogin},}
+  data:{authGuardPipe:redirectUnauthorizedToLogin},
+  },
+
+  {path:'patientlist', component:PatientListComponent,
+  canActivate:[AngularFireAuthGuard],
+  data:{authGuardPipe:redirectUnauthorizedToLogin},
+  }
 ];
 
 @NgModule({

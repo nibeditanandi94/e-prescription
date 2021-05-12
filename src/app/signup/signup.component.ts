@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
     .then(user => {
      console.log('Registered User' ,user);
      this.userservice.isLoggedUser.next(true)
-     this.router.navigate(['/home']);
+     this.router.navigate(['/login']);
     });
     }
 }

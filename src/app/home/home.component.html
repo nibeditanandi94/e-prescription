@@ -1,0 +1,14 @@
+<form [formGroup]="homeReactiveForm" (ngSubmit)="submit()">
+<div formArrayName="medicines">
+    <button (click)="onAddMedicines()">Add Medicines</button>
+    <br><br>
+    <div 
+    class="form-group"
+    *ngFor="let medicine of getControls(); let i=index">
+    <input type="text"
+    class="form-control"
+    [formControlName]="i">
+    </div>
+    </div>
+    <button type="submit">Submit</button><br><br>
+</form>
