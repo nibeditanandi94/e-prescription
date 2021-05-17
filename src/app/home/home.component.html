@@ -1,5 +1,39 @@
-<form [formGroup]="homeReactiveForm" (ngSubmit)="submit()">
-<div formArrayName="medicines">
+<form [formGroup]="homeReactiveForm" id="prescriptionForm"
+ (ngSubmit)="submit(homeReactiveForm.value)">
+<div class="form-group" >
+<label for="patientName">Patient Name</label>
+<input type="text"
+id="patientName"
+class="form-control"
+formControlName="patientName"
+>
+<p 
+*ngIf="!homeReactiveForm.get('patientName').valid && homeReactiveForm.get('patientName').touched">
+Patient Name is Requied
+</p>
+</div>
+
+<div class="form-group">
+    <label for="patientAge">Patient Age</label>
+    <input type="text"
+    id="patientAge"
+    class="form-control"
+    formControlName="patientAge">
+    <p 
+    *ngIf="!homeReactiveForm.get('patientAge').valid && homeReactiveForm.get('patientAge').touched">
+    Patient's Age is Requied
+</p>
+</div>
+
+<div class="radio" *ngFor="let gender of genders">
+    <label>
+        <input type="radio" id="gender"
+        [value]="gender"
+        formControlName="gender">{{gender}}
+    </label>
+</div>
+
+<div formArrayName="medicines" id="medicine">
     <button (click)="onAddMedicines()">Add Medicines</button>
     <br><br>
     <div 
@@ -9,6 +43,6 @@
     class="form-control"
     [formControlName]="i">
     </div>
-    </div>
-    <button type="submit">Submit</button><br><br>
+</div>
+    <button type="submit" [disabled]="!homeReactiveForm.valid">Submit</button><br><br>
 </form>

@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CoreModule } from './core/core.module';
     projectId: "eprescription-5f391",
     storageBucket: "eprescription-5f391.appspot.com",
     messagingSenderId: "581072553879",
-    appId: "1:581072553879:web:31c653ab030acf49ae26d2"})
+    appId: "1:581072553879:web:31c653ab030acf49ae26d2"}),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

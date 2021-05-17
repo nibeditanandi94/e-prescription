@@ -5,7 +5,8 @@ import{redirectUnauthorizedTo} from '@angular/fire/auth-guard'
 import { PatientListComponent } from './core/patient-list/patient-list.component';
 import { HomeComponent } from './home/home.component';
 
-const redirectUnauthorizedToLogin =() =>redirectUnauthorizedTo(['login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+
 
 const routes: Routes = [
   {path:'home',component:HomeComponent,
