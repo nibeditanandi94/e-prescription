@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Subject } from 'rxjs';
-
+import { Observable, Subject, Subscriber } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   isLoggedUser = new Subject<boolean>();
-
-  constructor(private auth:AngularFireAuth) { }
+  constructor(private auth:AngularFireAuth) {
+  }
 
   createUser(registerData:{email:string, password:string}){
     return this.auth.createUserWithEmailAndPassword(registerData.email,registerData.password);
