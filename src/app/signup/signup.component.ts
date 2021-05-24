@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 import 'firebase/auth';
 import { UserService } from '../core/services/user.service';
@@ -11,25 +12,49 @@ import { UserService } from '../core/services/user.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  registerForm:FormGroup
-  constructor(private router:Router, private userservice:UserService) { }
+
+  public signUpForm: AngularFirestoreCollection<any>;
+  registerForm: FormGroup
+  constructor(private router: Router,
+    private userservice: UserService,
+    private firestore: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
-    this.registerForm= new FormGroup({
-      email:new FormControl('',[Validators.required,
-                               Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      password:new FormControl('',[Validators.required,
-                                   Validators.minLength(6),
-                                  ])
+    this.signUpForm = this.firestore.collection('doctorsData');
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      password: new FormControl('', [Validators.required,
+      Validators.minLength(6),
+      ]),
+      fname: new FormControl(null, [Validators.required])
     })
   }
-  OnSignUp(){
-    const {email,password} = this.registerForm.value
+
+
+  submit(value: any) {
+    //register user and redirect to login
+    const { email, password } = this.registerForm.value;
+    const docData = {
+      fname: this.registerForm.get('fname').value,
+      email: this.registerForm.get('email').value
+    };
     this.userservice.createUser(this.registerForm.value)
-    .then(user => {
-     console.log('Registered User' ,user);
-     this.userservice.isLoggedUser.next(true)
-     this.router.navigate(['/login']);
-    });
-    }
+      .then(user => {
+
+        this.signUpForm.add(docData).then(res => {
+          this.userservice.isLoggedUser.next(true);
+          this.router.navigate(['/login']);
+          console.log("doctor data added to firebase database");
+        }).catch(err => console.log(err));
+
+
+        //console.log('Registered User' ,user);
+
+      });
+
+    //saving doc data to firebase
+
+  }
 }

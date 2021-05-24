@@ -28,6 +28,6 @@ export class LoginComponent implements OnInit {
      console.log('LoggedIn User' ,loginuser);
      this.userservice.isLoggedUser.next(true)
      this.router.navigate(['/home']);
-    });
-  }
+    }).catch(err => console.log("Error occurred"))
+  };
 }

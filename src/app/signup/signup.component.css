@@ -14,6 +14,10 @@ input#email.ng-invalid.ng-touched{
     border:1px solid red;
 }
 
+input#fname.ng-invalid.ng-touched{
+    border:1px solid red;
+}
+
 input#password.ng-invalid.ng-touched{
     border:1px solid red;
 }

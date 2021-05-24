@@ -7,15 +7,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginModule } from '../login/login.module';
 import { SignupModule } from '../signup/signup.module';
-import { PatientListComponent } from './patient-list/patient-list.component';
 import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
   declarations: [CoreMainComponent,
                  HeaderComponent, 
-                 FooterComponent, 
-                 PatientListComponent],
+                 FooterComponent
+                 ],
   imports: [
     CommonModule,
     CoreRoutingModule,
