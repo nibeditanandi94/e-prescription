@@ -7,6 +7,7 @@ import { PatientListComponent } from './patient/patient-list/patient-list.compon
 import { PatientDataComponent } from './patient/patient-data/patient-data.component';
 import { CoreMainComponent } from './core/core-main.component';
 import { LoginComponent } from './login/login.component';
+import { PrescriptionDataComponent } from './prescription/prescriptionData.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -31,6 +32,12 @@ const routes: Routes = [
   path : 'patientdata',
   component :  PatientDataComponent,
   canActivate:[AngularFireAuthGuard],
+  data:{authGuardPipe : redirectUnauthorizedToLogin}
+ },
+ {
+   path : 'prescriptiondata',
+   component: PrescriptionDataComponent,
+   canActivate:[AngularFireAuthGuard],
   data:{authGuardPipe : redirectUnauthorizedToLogin}
  }
   
