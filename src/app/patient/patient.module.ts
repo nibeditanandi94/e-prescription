@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PatientDataComponent } from './patient-data/patient-data.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PatientRoutingModule } from './patient-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
                  PatientListComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PatientRoutingModule
   ],
   exports:[PatientDataComponent]
 

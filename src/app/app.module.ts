@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import { PatientModule } from './patient/patient.module';
-import { PrescriptionModule } from './prescription/prescription.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +21,6 @@ import { PrescriptionModule } from './prescription/prescription.module';
     messagingSenderId: "581072553879",
     appId: "1:581072553879:web:31c653ab030acf49ae26d2"}),
     AngularFirestoreModule,
-    PatientModule,
-    PrescriptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

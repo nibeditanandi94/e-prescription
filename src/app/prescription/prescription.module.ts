@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrescriptionDataComponent } from './prescriptionData.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PrescriptionRoutingModule } from './prescription-routing.module';
 
 
 
@@ -9,7 +10,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [PrescriptionDataComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    PrescriptionRoutingModule
   ],
 
   exports: [PrescriptionDataComponent]
