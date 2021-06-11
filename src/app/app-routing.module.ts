@@ -4,7 +4,7 @@ import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 import{redirectUnauthorizedTo} from '@angular/fire/auth-guard'
 import { HomeComponent } from './home/home.component';
 import { PatientModule } from './patient/patient.module';
-
+import {PrescriptionModule} from './prescription/prescription.module';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -20,19 +20,14 @@ const routes: Routes = [
   data:{authGuardPipe : redirectUnauthorizedToLogin}
   },
 {
-  path : "patientlist",
-  loadChildren : ()=> PatientModule
-
-},
-{
-  path : "patientdata",
+  path : "patient",
   loadChildren : ()=> PatientModule
 
 },
 
  {
-   path : "prescriptiondata",
-   loadChildren : "../app/prescription/prescription.module#PrescriptionModule"
+   path : "patient",
+   loadChildren : ()=> PrescriptionModule
  }
   
 ];

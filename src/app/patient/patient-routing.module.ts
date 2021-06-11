@@ -10,12 +10,12 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes : Routes = [
   {
-    path : "",
+    path : "patientdata",
     component :  PatientDataComponent,
     canActivate:[AngularFireAuthGuard],
     data:{authGuardPipe : redirectUnauthorizedToLogin}
    },
-  {path:"",
+  {path:"patientlist",
   component:PatientListComponent,
   canActivate:[AngularFireAuthGuard],
   data:{authGuardPipe : redirectUnauthorizedToLogin}

@@ -30,14 +30,14 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
        this.prescriptionForm = new FormGroup({
         'medicines': new FormArray([]),
         'patientName' : new FormControl('',Validators.required),
-        // 'patientAge' : new FormControl('',Validators.required),
-        // 'patientGender' :new FormControl('',Validators.required)
+        'patientAge' : new FormControl('',Validators.required),
+        'patientGender' :new FormControl('',Validators.required)
       });
       this.prescriptionForm.setValue({
         'medicines':[],
         'patientName' : '',
-        // 'patientAge'  : '',
-        // 'patientGender' : ''
+        'patientAge'  : '',
+        'patientGender' : ''
       });
       this.prescreptionPutData=this.firestore.collection('prescriptionfireData');
     }
