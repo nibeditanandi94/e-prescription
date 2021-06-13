@@ -16,7 +16,7 @@ const routes: Routes = [
   redirectTo:'/login',
   pathMatch:'full'
   },
-  //test
+  
   {
   path : "login",
   loadChildren : ()=> LoginModule
