@@ -90,5 +90,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         {
           console.log("Prescription data added to the firebase Database");
       }).catch(err=>console.log(err))
+      this.prescriptionForm.reset();
     };
   }
