@@ -40,7 +40,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         'patientGender' : ''
       });
 
-    this.onPatientSelection();
+       this.prescriptionForm.controls['patientName'].setValue(this.selectedPatient);
+       this.prescriptionForm.controls['patientAge'].setValue(this.selectedPatient.patientAge);
+      this.prescriptionForm.controls['patientGender'].setValue(this.selectedPatient.patientGender);
+     
+      this.onPatientSelection();
       this.prescreptionPutData=this.firestore.collection('prescriptionfireData');
       
     }
@@ -81,8 +85,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
       return (this.prescriptionForm.get('medicines') as FormArray).controls
     }
     submit(value:any){
-      this.onAddMedicines();
-      this.getControls();
       console.log(value);
       this.prescreptionPutData.add(value).then(res=>
         {
