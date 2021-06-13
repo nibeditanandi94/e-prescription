@@ -40,11 +40,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         'patientGender' : ''
       });
 
-      this.prescriptionForm.controls['patientName'].setValue(this.selectedPatient);
-      this.prescriptionForm.controls['patientAge'].setValue(this.selectedPatient.patientAge);
-      this.prescriptionForm.controls['patientGender'].setValue(this.selectedPatient.patientGender);
-     
-      this.onPatientSelection();
+    this.onPatientSelection();
       this.prescreptionPutData=this.firestore.collection('prescriptionfireData');
       
     }
