@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ePrescription';
+  
+  constructor(){
+    console.log("main app loaded");
+  }
 }

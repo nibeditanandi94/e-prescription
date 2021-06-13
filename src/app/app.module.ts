@@ -13,7 +13,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 }*/
 
 export function logOut(auth: AngularFireAuth) {
-  return() => auth.signOut;
+  console.log("app initializer loaded");
+  return() => auth.signOut();
  }
 
 @NgModule({
