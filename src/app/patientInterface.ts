@@ -2,6 +2,6 @@
 export interface IPatientData {
 patientName :  string;
 patientID : string;
-gender :string;
+patientGender :string;
 patientAge : number;
 }

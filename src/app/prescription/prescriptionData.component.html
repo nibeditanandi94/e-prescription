@@ -1,35 +1,35 @@
 <form [formGroup]="prescriptionForm" (ngSubmit)="submit(prescriptionForm.value)">
-<label>Select Patient</label>
-<br>
-<select formControlName="patientName" [(ngModel)]="selectedPatient">
-    <option selected disabled>Select Patient</option>
-    <option  *ngFor = "let patient of patientsCollection | async" 
-    [ngValue]="patient">
-     {{patient.patientName}}
-    </option>
-</select>
-<br>
-<br>
-<label>Patient Age</label>
-<input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedPatient.patientAge" [disabled]="true"/>
-<br>
-<br>
-<label>Gender</label>
-<input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedPatient.gender" [disabled]="true"/>
-<br>
-<br>
-
-<div formArrayName="medicines" id="medicine">
-    <button type="button" (click)="onAddMedicines()">Add Medicines</button>
-    <br><br>
-    <div 
-    class="form-group"
-    *ngFor="let medicine of getControls(); let i=index">
-    <input type="text"
-    class="form-control"
-    [formControlName]="i">
+    <label>Select Patient</label>
+    <br>
+    <select formControlName="patientName" (change)="onPatientSelection()"> 
+        <option selected disabled>Select Patient</option>
+        <option  *ngFor = "let patient of patientsCollection | async" 
+        [ngValue]="patient">
+         {{patient.patientName}}
+        </option>
+    </select>
+    <br>
+    <br>
+    <label>Patient Age</label>
+    <input type="text" formControlName="patientAge"/>
+    <br>
+    <br>
+    <label>Gender</label>
+    <input type="text" formControlName="patientGender"/>
+    <br>
+    <br>
+    
+    <div formArrayName="medicines" id="medicine">
+        <button type="button" (click)="onAddMedicines()">Add Medicines</button>
+        <br><br>
+        <div 
+        class="form-group"
+        *ngFor="let medicine of getControls(); let i=index">
+        <input type="text"
+        class="form-control"
+        [formControlName]="i">
+        </div>
     </div>
-</div>
-<br><br>
-<button type="submit" [disabled]="!prescriptionForm.valid">Submit Prescription</button>
-</form>
+    <br><br>
+    <button type="submit" [disabled]="!prescriptionForm.valid">Submit Prescription</button>
+    </form>

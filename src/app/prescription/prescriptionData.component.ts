@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../core/services/user.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IPatientData } from '../patientInterface';
 import { FormArray, FormGroup } from '@angular/forms';
-import { FormControl } from '@angular/forms';
-import { Validators } from '@angular/forms';
+import { FormControl,Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
@@ -21,9 +20,10 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
     private prescreptionPutData:AngularFirestoreCollection<any>;
     constructor(private userService:UserService,
                 private firestore:AngularFirestore) { }
+  
   patientName: string;
   patientID: string;
-  gender: string;
+  patientGender: string;
   patientAge: number;
     ngOnInit(): void{
        this.onGetPatientData();
@@ -39,7 +39,28 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         'patientAge'  : '',
         'patientGender' : ''
       });
+
+      this.prescriptionForm.controls['patientName'].setValue(this.selectedPatient);
+      this.prescriptionForm.controls['patientAge'].setValue(this.selectedPatient.patientAge);
+      this.prescriptionForm.controls['patientGender'].setValue(this.selectedPatient.patientGender);
+     
+      this.onPatientSelection();
       this.prescreptionPutData=this.firestore.collection('prescriptionfireData');
+      
+    }
+
+    onPatientSelection(){
+      console.log("patient selected");
+      this.prescriptionForm.get('patientName').valueChanges.subscribe
+      (selectedPatient => {
+        if(selectedPatient!= null){
+          console.log(selectedPatient);
+      this.prescriptionForm.controls[('patientAge')].patchValue(selectedPatient.patientAge);
+      this.prescriptionForm.get('patientAge').disable();
+      this.prescriptionForm.controls[('patientGender')].patchValue( selectedPatient.gender);
+      this.prescriptionForm.get('patientGender').disable();
+        }
+      });
     }
    
     onGetPatientData(){
@@ -53,6 +74,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         );
         
     }
+
+   
     onAddMedicines(){
       const formInput = new FormControl(null,Validators.required);
       (<FormArray> this.prescriptionForm.get('medicines')).push(formInput) 
