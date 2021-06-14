@@ -36,14 +36,17 @@ export class SignupComponent implements OnInit {
   submit(value: any) {
     //register user and redirect to login
     const { email, password } = this.registerForm.value;
-    const docData = {
-      fname: this.registerForm.get('fname').value,
-      email: this.registerForm.get('email').value
-    };
+    
     this.userservice.createUser(this.registerForm.value)
-      .then(user => {
-
+      .then(doctorData => {
+       console.log(doctorData.user.uid);
+       const docData = {
+        fname: this.registerForm.get('fname').value,
+        email: this.registerForm.get('email').value,
+        docId: doctorData.user.uid
+      };
         this.signUpForm.add(docData).then(res => {
+          console.log("submitted res"  + res);
           this.userservice.isLoggedUser.next(true);
           this.router.navigate(['/login']);
           console.log("doctor data added to firebase database");

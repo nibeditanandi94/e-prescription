@@ -40,9 +40,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
         'patientGender' : ''
       });
 
-       this.prescriptionForm.controls['patientName'].setValue(this.selectedPatient);
-       this.prescriptionForm.controls['patientAge'].setValue(this.selectedPatient.patientAge);
-      this.prescriptionForm.controls['patientGender'].setValue(this.selectedPatient.patientGender);
+      //  this.prescriptionForm.controls['patientName'].setValue(this.selectedPatient);
+      //  this.prescriptionForm.controls['patientAge'].setValue(this.selectedPatient.patientAge);
+      // this.prescriptionForm.controls['patientGender'].setValue(this.selectedPatient.patientGender);
      
       this.onPatientSelection();
       this.prescreptionPutData=this.firestore.collection('prescriptionfireData');
@@ -86,10 +86,18 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
     }
     submit(value:any){
       console.log(value);
+     // console.log(this.prescriptionForm.getRawValue())
+     // this.getControls();
       this.prescreptionPutData.add(value).then(res=>
         {
           console.log("Prescription data added to the firebase Database");
       }).catch(err=>console.log(err))
-      this.prescriptionForm.reset();
+      
+      this.resetPrescription();
     };
+    resetPrescription(){
+      (<FormArray> this.prescriptionForm.get('medicines')).clear();
+      this.prescriptionForm.reset();
+    }
+
   }

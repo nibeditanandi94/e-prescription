@@ -1,7 +1,7 @@
 <form [formGroup]="prescriptionForm" (ngSubmit)="submit(prescriptionForm.value)">
     <label>Select Patient</label>
     <br>
-    <select formControlName="patientName" (change)="onPatientSelection()"> 
+    <select formControlName="patientName"> 
         <option selected disabled>Select Patient</option>
         <option  *ngFor = "let patient of patientsCollection | async" 
         [ngValue]="patient">
