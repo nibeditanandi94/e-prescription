@@ -1,38 +1,65 @@
 <form class="form" [formGroup]="registerForm" id="signUpForm"
 (ngSubmit)="submit(registerForm.value)"
 >
-<div class="form-control">
+
+<div class="row m-t-10">
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+    <input formControlName="fname" type="fname" id="fname" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+  </div>
+  <p *ngIf="!registerForm.get('fname').valid && registerForm.get('fname').touched">
+    Name is required
+  </p>
+</div>
+<!-- <div class="form-control">
   <label for="fname">Name</label> 
   <input formControlName="fname" type="fname" id="fname">
   <p *ngIf="!registerForm.get('fname').valid && registerForm.get('fname').touched">
     Name is required
   </p>
 </div>
-<br>
-<div class="form-control">
+<br> -->
+<div class="row m-t-10">
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">@</span>
+    <input formControlName="email" type="email" id="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+  </div>
+  <p *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
+    Email field is required
+  </p>
+</div> 
+
+<!-- <div class="form-control">
   <label for="email">Email</label> 
   <input formControlName="email" type="email" id="email">
   <p *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
     Email field is required
   </p>
-</div>
+</div> -->
 
-<br>
+<!-- <br>  -->
 
-<div class="form-control">
-  <label for="password">Password</label> 
-  <input formControlName="password" type="password" id="password">
+<div class="row m-t-10">
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+    <input formControlName="password" type="password" id="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+  </div>
   <p *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
     Please enter a valid & 6-character password.
   </p>
 </div>
 
+<!-- <div class="form-control">
+  <label for="password">Password</label> 
+  <input formControlName="password" type="password" id="password">
+  <p *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+    Please enter a valid & 6-character password.
+  </p>
+</div> -->
+
 <div class="form-footer">
-  <button type="submit" style="margin-top:20px;"
-  [disabled]="!registerForm.valid">
-    Register
-  </button>
-  <a [routerLink]="'/login'">Login</a>
+  <a class="btn btn-primary" [routerLink]="'/login'">Login</a>
+  <button type="submit" class="btn btn-success"  [disabled]="!registerForm.valid"> Register </button>
 </div>
 
 </form>
