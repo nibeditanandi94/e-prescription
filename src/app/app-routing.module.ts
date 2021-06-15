@@ -34,7 +34,7 @@ const routes: Routes = [
 },
 
  {
-   path : "patient",
+   path : "prescription",
    loadChildren : ()=> PrescriptionModule
  }
   
