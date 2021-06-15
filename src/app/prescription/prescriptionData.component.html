@@ -1,25 +1,56 @@
-<form [formGroup]="prescriptionForm" (ngSubmit)="submit(prescriptionForm.value)">
-    <label>Select Patient</label>
-    <br>
-    <select formControlName="patientName"> 
-        <option selected disabled>Select Patient</option>
-        <option  *ngFor = "let patient of patientsCollection | async" 
-        [ngValue]="patient">
-         {{patient.patientName}}
-        </option>
-    </select>
-    <br>
-    <br>
-    <label>Patient Age</label>
-    <input type="text" formControlName="patientAge"/>
-    <br>
-    <br>
-    <label>Gender</label>
-    <input type="text" formControlName="patientGender"/>
-    <br>
-    <br>
+<form class="m-l-10" [formGroup]="prescriptionForm" (ngSubmit)="submit(prescriptionForm.value)">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="patD">Select Patient:</label>
+                <select formControlName="patientName" class="form-control" id="patD">
+                    <option selected disabled>Select Patient</option>
+                    <option  *ngFor = "let patient of patientsCollection | async" 
+                    [ngValue]="patient">
+                     {{patient.patientName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--AGe-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="age">Patient's Age:</label>
+                <input type="text" class="form-control" id="age" formControlName="patientAge">
+            </div>
+        </div>
+    </div>
+    <!--Gender-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <input type="text" class="form-control" id="gender" formControlName="patientGender">
+            </div>
+        </div>
+    </div>
+
+    <!--Medicines-->
     
-    <div formArrayName="medicines" id="medicine">
+    <div class="row" formArrayName="medicines">
+        <div class="row m-b-5">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-warning m-l-15" (click)="onAddMedicines()">Add Medicines</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 m-b-5 m-l-15" *ngFor="let medicine of getControls(); let i=index">
+                <label for="med{{i}}">Medicine {{i+1}}</label>
+                <input type="text" class="form-control" id="med{{i}}" [formControlName]="i">
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    <!-- <div formArrayName="medicines" id="medicine">
         <button type="button" (click)="onAddMedicines()">Add Medicines</button>
         <br><br>
         <div 
@@ -29,7 +60,7 @@
         class="form-control"
         [formControlName]="i">
         </div>
-    </div>
+    </div> -->
     <br><br>
-    <button type="submit" [disabled]="!prescriptionForm.valid">Submit Prescription</button>
-    </form>
+    <button type="submit" class="btn btn-primary" [disabled]="!prescriptionForm.valid">Submit Prescription</button>
+</form>
