@@ -1,12 +1,16 @@
 .form {
     width: 340px;
-    margin-left: 410px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 }
+
 
 .form-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 }
 
 input#email.ng-invalid.ng-touched{
@@ -15,4 +19,8 @@ input#email.ng-invalid.ng-touched{
 
 input#password.ng-invalid.ng-touched{
     border:1px solid red;
+}
+
+.m-t-10 {
+    margin-top: 10px;
 }

@@ -15,11 +15,11 @@
 
       <ng-container *ngIf="!userLoggedIn">
 
-        <button [routerLink]="'/login'" class="btn btn-primary" type="button">
+        <button [routerLink]="'/login'" class="btn btn-primary m-r-10" type="button">
           Login
         </button>
 
-        <button [routerLink]="'/register'" class="btn btn-primary" type="button">
+        <button [routerLink]="'/register'" class="btn btn-primary m-r-10" type="button">
           Register
         </button>
 
@@ -27,7 +27,7 @@
 
       <li>
         <button *ngIf="userLoggedIn" [routerLink]="'/login'" 
-        class="btn btn-primary" (click)="onLogout()" 
+        class="btn btn-danger" (click)="onLogout()" 
         style="margin-right: 25px;">
         Logout
       </button>

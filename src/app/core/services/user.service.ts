@@ -21,7 +21,7 @@ export class UserService {
     getPatientData(){
       return this.database.collection("patientData").snapshotChanges();
     }
-    getDocId(){
+    getDoctorData(){
       return this.database.collection('doctorsData').snapshotChanges();
     }
 }
