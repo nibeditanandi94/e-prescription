@@ -18,6 +18,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
     selectedPatient :IPatientData= {}as any;
     prescriptionForm : FormGroup;
     private prescreptionPutData:AngularFirestoreCollection<any>;
+    
     constructor(private userService:UserService,
                 private firestore:AngularFirestore) { }
   
