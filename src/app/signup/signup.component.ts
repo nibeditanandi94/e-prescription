@@ -34,30 +34,19 @@ export class SignupComponent implements OnInit {
 
 
   submit(value: any) {
-    //register user and redirect to login
-    const { email, password } = this.registerForm.value;
-    
+    //register user and redirect to home
     this.userservice.createUser(this.registerForm.value)
       .then(doctorData => {
-       console.log(doctorData.user.uid);
-       const docData = {
-        fname: this.registerForm.get('fname').value,
-        email: this.registerForm.get('email').value,
-        docId: doctorData.user.uid
-      };
+        const docData = {
+          fname: this.registerForm.get('fname').value,
+          email: this.registerForm.get('email').value,
+          docId: doctorData.user.uid
+        };
         this.signUpForm.add(docData).then(res => {
-          console.log("submitted res"  + res);
           this.userservice.isLoggedUser.next(true);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/home']);
           console.log("doctor data added to firebase database");
         }).catch(err => console.log(err));
-
-
-        //console.log('Registered User' ,user);
-
       });
-
-    //saving doc data to firebase
-
   }
 }

@@ -1,43 +1,43 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
-import{redirectUnauthorizedTo} from '@angular/fire/auth-guard'
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 import { HomeComponent } from './home/home.component';
 import { PatientModule } from './patient/patient.module';
-import {PrescriptionModule} from './prescription/prescription.module';
-import { LoginComponent } from './login/login.component';
+import { PrescriptionModule } from './prescription/prescription.module';
 import { LoginModule } from './login/login.module';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 
 const routes: Routes = [
-  {path:'',
-  redirectTo:'/login',
-  pathMatch:'full'
-  },
-  
   {
-  path : "login",
-  loadChildren : ()=> LoginModule
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   },
 
-  {path:'home',
-  component:HomeComponent,
-  canActivate:[AngularFireAuthGuard],
-  data:{authGuardPipe : redirectUnauthorizedToLogin}
+  {
+    path: "login",
+    loadChildren: () => LoginModule
   },
-{
-  path : "patient",
-  loadChildren : ()=> PatientModule
 
-},
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: "patient",
+    loadChildren: "../app/patient/patient.module#PatientModule"
+  },
 
- {
-   path : "prescription",
-   loadChildren : ()=> PrescriptionModule
- }
-  
+  {
+    path: "prescription",
+    loadChildren: "../app/prescription/prescription.module#PrescriptionModule"
+  }
+
 ];
 
 @NgModule({

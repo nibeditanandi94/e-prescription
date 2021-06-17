@@ -6,11 +6,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-//import { UserService } from './core/services/user.service';
-
-/*export function login(userService: UserService) {
- return() => userService.login;
-}*/
 
 export function logOut(auth: AngularFireAuth) {
   console.log("app initializer loaded");

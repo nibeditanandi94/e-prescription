@@ -5,15 +5,14 @@
                 <label for="patD">Select Patient:</label>
                 <select formControlName="patientName" class="form-control" id="patD">
                     <option selected disabled>Select Patient</option>
-                    <option  *ngFor = "let patient of patientsCollection | async" 
-                    [ngValue]="patient">
-                     {{patient.patientName}}
+                    <option *ngFor="let patient of patientsCollection | async" [ngValue]="patient">
+                        {{patient.patientName}}
                     </option>
                 </select>
             </div>
         </div>
     </div>
-    <!--AGe-->
+    <!--age-->
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -33,7 +32,7 @@
     </div>
 
     <!--Medicines-->
-    
+
     <div class="row" formArrayName="medicines">
         <div class="row m-b-5">
             <div class="col-md-3">
@@ -46,10 +45,10 @@
                 <input type="text" class="form-control" id="med{{i}}" [formControlName]="i">
             </div>
         </div>
-        
+
     </div>
-    
-    
+
+
     <!-- <div formArrayName="medicines" id="medicine">
         <button type="button" (click)="onAddMedicines()">Add Medicines</button>
         <br><br>

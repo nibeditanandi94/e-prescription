@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 

@@ -22,10 +22,8 @@ export class LoginComponent implements OnInit {
   }
   
   onLogin(){
-    const {email,password} = this.loginForm.value
     this.userservice.login(this.loginForm.value)
     .then(loginuser => {
-     console.log('LoggedIn User' ,loginuser);
      this.userservice.isLoggedUser.next(true)
      this.router.navigate(['/home']);
     }).catch(err => console.log("Error occurred"))
