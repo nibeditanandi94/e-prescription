@@ -13,14 +13,17 @@
     margin-top: 10px;
 }
 
-input#email.ng-invalid.ng-touched{
+input#email.ng-invalid.ng-touched,
+input#password.ng-invalid.ng-touched
+{
     border:1px solid red;
 }
 
-input#password.ng-invalid.ng-touched{
-    border:1px solid red;
+.reqPassword,
+.reqEmail
+{
+    color:red;
 }
-
 .m-t-10 {
     margin-top: 10px;
 }

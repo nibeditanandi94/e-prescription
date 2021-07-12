@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../core/services/user.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -13,14 +13,18 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
   styleUrls: ['./prescriptionData.component.css']
 })
 
-export class PrescriptionDataComponent implements OnInit, IPatientData {
+export class PrescriptionDataComponent implements OnInit, IPatientData, OnDestroy {
   patientsCollection: Observable<IPatientData[]>;
   selectedPatient: IPatientData = {} as any;
   prescriptionForm: FormGroup;
   private prescreptionPutData: AngularFirestoreCollection<any>;
+  private subscription;
 
   constructor(private userService: UserService,
     private firestore: AngularFirestore) { }
+  ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+  }
 
   patientName: string;
   patientID: string;
@@ -34,20 +38,20 @@ export class PrescriptionDataComponent implements OnInit, IPatientData {
       'patientAge': new FormControl('', Validators.required),
       'patientGender': new FormControl('', Validators.required)
     });
-    this.prescriptionForm.setValue({
-      'medicines': [],
-      'patientName': '',
-      'patientAge': '',
-      'patientGender': ''
-    });
+    // this.prescriptionForm.setValue({
+    //   'medicines': [],
+    //   'patientName': '',
+    //   'patientAge': '',
+    //   'patientGender': ''
+    // });
 
     this.onPatientSelection();
     this.prescreptionPutData = this.firestore.collection('prescriptionfireData');
-
+    
   }
 
   onPatientSelection() {
-    this.prescriptionForm.get('patientName').valueChanges.subscribe
+   this.subscription= this.prescriptionForm.get('patientName').valueChanges.subscribe
       (selectedPatient => {
         if (selectedPatient != null) {
           console.log(selectedPatient);
@@ -74,7 +78,8 @@ export class PrescriptionDataComponent implements OnInit, IPatientData {
 
   onAddMedicines() {
     const formInput = new FormControl(null, Validators.required);
-    (<FormArray>this.prescriptionForm.get('medicines')).push(formInput)
+   // (<FormArray>this.prescriptionForm.get('medicines')).push(formInput)
+   (this.prescriptionForm.get('medicines') as FormArray).push(formInput);
   }
 
   getControls() {

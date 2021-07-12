@@ -9,7 +9,6 @@ import { LoginModule } from '../login/login.module';
 import { SignupModule } from '../signup/signup.module';
 import { HomeModule } from '../home/home.module';
 
-
 @NgModule({
   declarations: [CoreMainComponent,
                  HeaderComponent, 

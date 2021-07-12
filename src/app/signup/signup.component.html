@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="registerForm" id="signUpForm" (ngSubmit)="submit(registerForm.value)">
+<form class="form" [formGroup]="registerForm" id="signUpForm" (ngSubmit)="submit()">
 
   <div class="row m-t-10">
     <div class="input-group">
@@ -7,7 +7,7 @@
       <input formControlName="fname" type="fname" id="fname" class="form-control" placeholder="Name"
         aria-describedby="basic-addon1">
     </div>
-    <p *ngIf="!registerForm.get('fname').valid && registerForm.get('fname').touched">
+   <p class= "regName" *ngIf="!registerForm.get('fname').valid && registerForm.get('fname').touched">
       Name is required
     </p>
   </div>
@@ -18,7 +18,7 @@
       <input formControlName="email" type="email" id="email" class="form-control" placeholder="Email"
         aria-describedby="basic-addon1">
     </div>
-    <p *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
+    <p class="reqEmail" *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
       Email field is required
     </p>
   </div>
@@ -30,14 +30,15 @@
       <input formControlName="password" type="password" id="password" class="form-control" placeholder="Password"
         aria-describedby="basic-addon1">
     </div>
-    <p *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+   <p class="reqPassword" 
+    *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
       Please enter a valid & min 6-character password.
     </p>
   </div>
 
   <div class="form-footer">
     <a class="btn btn-primary" [routerLink]="'/login'">Login</a>
-    <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid"> Register </button>
+    <button type="submit" class="btn btn-success" (click)="submit()"> Register </button>
   </div>
 
 </form>

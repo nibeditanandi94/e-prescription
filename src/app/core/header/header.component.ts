@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../services/user.service';
 
@@ -8,15 +8,18 @@ import { UserService } from '../services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-
+export class HeaderComponent implements OnInit , OnDestroy{
+ private subscription;
   userLoggedIn=false;
   constructor(private userService:UserService,
               private auth:AngularFireAuth,
              ) { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.userService.isLoggedUser.subscribe(isLoggedIn =>
+    this.subscription = this.userService.isLoggedUser.subscribe(isLoggedIn =>
       {
         this.userLoggedIn=isLoggedIn;
       });

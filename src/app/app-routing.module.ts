@@ -28,16 +28,27 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
+  // {
+  //   path: "patient",
+  //   loadChildren: "../app/patient/patient.module#PatientModule"
+  // },
+
+  // {
+  //   path: "prescription",
+  //   loadChildren: "../app/prescription/prescription.module#PrescriptionModule"
+  // }
+
   {
-    path: "patient",
-    loadChildren: "../app/patient/patient.module#PatientModule"
+    path : 'patient',
+    loadChildren : () => import('./patient/patient.module')
+    .then(m => m.PatientModule)
   },
 
   {
-    path: "prescription",
-    loadChildren: "../app/prescription/prescription.module#PrescriptionModule"
+    path : 'prescription',
+    loadChildren : () => import('./prescription/prescription.module')
+    .then(m => m.PrescriptionModule)
   }
-
 ];
 
 @NgModule({

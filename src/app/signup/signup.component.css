@@ -13,19 +13,17 @@
     margin-top: 10px;
 }
 
-input#email.ng-invalid.ng-touched{
-    border:1px solid red;
-}
-
-input#fname.ng-invalid.ng-touched{
-    border:1px solid red;
-}
-
+input#email.ng-invalid.ng-touched,
+input#fname.ng-invalid.ng-touched,
 input#password.ng-invalid.ng-touched{
     border:1px solid red;
 }
 
-
+.regName,
+.reqEmail,
+.reqPassword{
+    color:red;
+}
 .m-t-10 {
     margin-top: 10px;
 }

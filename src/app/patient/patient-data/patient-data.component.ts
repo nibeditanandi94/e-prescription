@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-patient-data',
@@ -9,13 +10,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PatientDataComponent implements OnInit {
 
-  private patientdata: AngularFirestoreCollection<any>;
+  private patientDocument: AngularFirestoreCollection<any>;
   patientReactiveForm: FormGroup;
   genders = ['male', 'female'];
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.patientdata = this.firestore.collection('patientData')
+    this.patientDocument = this.firestore.collection('patientDocument')
     this.patientReactiveForm = new FormGroup({
       'patientName': new FormControl(
         null, [Validators.required
@@ -32,13 +33,12 @@ export class PatientDataComponent implements OnInit {
     });
 
   }
-
   submit(value: any) {
-    console.log(value);
-    this.patientdata.add(value).then(res => {
-      console.log("Patient Data added to the firebase Database");
-    }).catch(err => console.log(err))
-    this.patientReactiveForm.reset();
-  };
-
-}
+      console.log(value);
+     from(this.patientDocument.add(value).then (res =>{
+     })).subscribe(patientdata =>{
+       console.log("patient data added to the firebase database");
+     })    
+     this.patientReactiveForm.reset();
+    };
+  }

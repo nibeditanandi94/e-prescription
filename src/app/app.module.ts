@@ -14,7 +14,7 @@ export function logOut(auth: AngularFireAuth) {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -19,9 +19,9 @@ export class UserService {
     return this.auth.signInWithEmailAndPassword(loginData.email, loginData.password);
   }
   getPatientData() {
-    return this.database.collection("patientData").snapshotChanges();
+    return this.database.collection("patientDocument").snapshotChanges();
   }
   getDoctorData() {
-    return this.database.collection('doctorsData').snapshotChanges();
+    return this.database.collection('doctorDocument').snapshotChanges();
   }
 }
